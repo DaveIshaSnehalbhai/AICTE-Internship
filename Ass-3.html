@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+		<script src="three.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js" integrity="sha512-WoO4Ih0CDOSLYafy22wZD/mcJ7k0ESLqtQsFa6zFKnEUrbtuGU+GkLtVhgt93xa2qewG5gKEC6CWlN8OaCTSVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+         <script>
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( renderer.domElement );
+
+            const geometry = new THREE.BoxGeometry( 2, 2, 2 );
+            const material = new THREE.MeshBasicMaterial( { color: 'blue' } );
+            const cube = new THREE.Mesh( geometry, material );
+            scene.add( cube );
+
+            camera.position.z = 5;
+       
+         function animate() {
+	     requestAnimationFrame( animate );
+         cube.rotation.x +=0.01;
+         cube.rotation.y +=0.01;
+	     renderer.render( scene, camera );
+}
+animate();
+         const gui = new dat.GUI();
+
+         gui.add(cube.position,'x',-50,50,0.1).name("X position");
+         gui.add(cube.scale,'x',1,10,0.5).name("X Scale");
+         gui.add(cube.rotation,'x',0,Math.PI*2).name("X Rotation");
+
+         gui.add(cube.material,"wireframe");
+         gui.add(cube,"visible");
+
+         let folderRGB = gui.addFolder("RGB");
+         folderRGB.add(cube.material.color,"r",0,1).name("color red");
+         folderRGB.add(cube.material.color,"r",0,1).name("color green");
+         folderRGB.add(cube.material.color,"r",0,1).name("color blue");
+
+        let palette={color: [0,255,255]}
+
+        folderRGB.addColor(palatte,'color').onChange(function(value)
+        {
+            cube.material.color.r = value[0]/255;
+            cube.material.color.g = value[1]/255;
+            cube.material.color.b = value[2]/255;
+        })
+
+			
+		</script>
+	</body>
+</html>
