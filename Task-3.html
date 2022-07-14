@@ -26,13 +26,13 @@
 
             camera.position.z = 5;
        
-         function animate() {
-	     requestAnimationFrame( animate );
-         cube.rotation.x +=0.01;
-         cube.rotation.y +=0.01;
-	     renderer.render( scene, camera );
+            function animate() {
+	    requestAnimationFrame( animate );
+            cube.rotation.x +=0.01;
+            cube.rotation.y +=0.01;
+	    renderer.render( scene, camera );
 }
-animate();
+           animate();
          const gui = new dat.GUI();
 
          gui.add(cube.position,'x',-50,50,0.1).name("X position");
